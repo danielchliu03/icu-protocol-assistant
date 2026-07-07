@@ -5,7 +5,7 @@
 # ----------------------------
 
 import re
-from ingest import extract_text
+from src.ingest import extract_text
 
 def chunk_text_smart(text, max_chunk_size=500, overlap=100):
     """
