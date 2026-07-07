@@ -53,7 +53,10 @@ class ProtocolSearcher:
         similarities = cosine_similarity(question_embedding, self.embeddings)[0]
         
         # Step 3: Get the indices of the most similar chunks
+        # Add similarity filtering:
         top_indices = np.argsort(similarities)[::-1][:top_k]
+        # Only keep results above 0.25 similarity
+        top_indices = [idx for idx in top_indices if similarities[idx] > 0.25]
         
         # Step 4: Return the top results with their similarity scores
         results = []
