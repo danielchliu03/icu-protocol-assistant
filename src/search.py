@@ -74,7 +74,7 @@ class ProtocolSearcher:
         results = self.search(question, top_k)
         
         # Combine the top results into context for the AI
-        context_chunks = [chunk for score, chunk in results if score > 0.1]  # Only include reasonably relevant chunks
+        context_chunks = [chunk for score, chunk in results if score > 0.3]  # Only include reasonably relevant chunks
         
         if not context_chunks:
             return "❌ No relevant protocol information found for this question."
