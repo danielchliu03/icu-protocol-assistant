@@ -9,6 +9,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 from src.search import ProtocolSearcher
+import glob
 
 # Load environment variables
 load_dotenv()
@@ -38,10 +39,8 @@ def get_protocol_searcher():
         from src.embeddings import EmbeddingManager
         
         # Process both protocol files
-        protocol_files = [
-            "protocols/UFH-Antibiotic-Protocol.pdf",
-            "protocols/ICU-Delirium.pdf"
-        ]
+       import glob
+        protocol_files = glob.glob("protocols/*.pdf")
         
         all_chunks = []
         for pdf_path in protocol_files:
