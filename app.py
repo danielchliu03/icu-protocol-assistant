@@ -71,9 +71,14 @@ RELEVANT ICU PROTOCOL INFORMATION:
 
 CLINICAL QUESTION: {question}
 
-Please provide a helpful, accurate response based on the protocol information above. If the protocols don't contain enough information to fully answer the question, say so and provide what information is available. Always mention that this is based on the provided protocols and encourage consulting with senior staff for complex cases.
+Instructions:
+- ONLY use information directly relevant to the question
+- If the protocols don't contain specific information for this question, say so clearly
+- Focus on specific dosing, timing, and approval requirements when available
+- Ignore general background information unless directly relevant
+- Be concise and clinical
 
-Include specific dosing, duration, and approval requirements when mentioned in the protocols."""
+Response:"""
 
     try:
         response = client.chat.completions.create(
