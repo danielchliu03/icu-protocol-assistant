@@ -25,7 +25,39 @@ def get_ai_client():
 @st.cache_resource
 def get_protocol_searcher():
     """Initialize the protocol searcher (cached for performance)"""
-    return ProtocolSearcher()
+    try:
+        # Try to load existing embeddings
+        searcher = ProtocolSearcher()
+        return searcher
+    except:
+        # If embeddings don't exist, create them automatically
+        st.info("🔧 First-time setup: Creating embeddings from your protocols...")
+        
+        from src.chunker import chunk_text
+        from src.ingest import extract_text
+        from src.embeddings import EmbeddingManager
+        
+        # Process both protocol files
+        protocol_files = [
+            "protocols/UFH-Antibiotic-Protocol.pdf",
+            "protocols/ICU-Delirium.pdf"
+        ]
+        
+        all_chunks = []
+        for pdf_path in protocol_files:
+            if os.path.exists(pdf_path):
+                text = extract_text(pdf_path)
+                chunks = chunk_text(text, chunk_size=500, overlap=100)
+                all_chunks.extend(chunks)
+        
+        # Create embeddings
+        embedding_manager = EmbeddingManager()
+        embeddings = embedding_manager.create_embeddings(all_chunks)
+        embedding_manager.save_embeddings(embeddings, all_chunks, "icu_protocol_embeddings.pkl")
+        
+        # Now create the searcher
+        searcher = ProtocolSearcher()
+        return searcher
 
 def generate_ai_response(question, protocol_context):
     """
