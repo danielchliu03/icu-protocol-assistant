@@ -79,8 +79,8 @@ class EmbeddingManager:
 # ----------------------------
 if __name__ == "__main__":
     # Test the embedding system with your ICU protocols
-    from chunker import chunk_text
-    from ingest import extract_text
+    from src.chunker import chunk_text
+    from src.ingest import extract_text
     
     # Step 1: Extract and chunk text from PDF
     print("📄 Processing ICU protocol...")
