@@ -39,7 +39,6 @@ def get_protocol_searcher():
         from src.embeddings import EmbeddingManager
         
         # Process both protocol files
-       import glob
         protocol_files = glob.glob("protocols/*.pdf")
         
         all_chunks = []
