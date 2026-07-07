@@ -58,7 +58,7 @@ def get_protocol_searcher():
         # Now create the searcher
         searcher = ProtocolSearcher()
         return searcher
-
+        
 def generate_ai_response(question, protocol_context):
     """
     Generate an AI response using Navigator + retrieved protocol information
